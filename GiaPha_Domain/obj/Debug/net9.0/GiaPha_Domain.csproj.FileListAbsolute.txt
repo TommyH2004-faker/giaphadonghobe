@@ -1,0 +1,11 @@
+D:\GiaPhaDongHo\GiaPha_Domain\bin\Debug\net9.0\GiaPha_Domain.deps.json
+D:\GiaPhaDongHo\GiaPha_Domain\bin\Debug\net9.0\GiaPha_Domain.dll
+D:\GiaPhaDongHo\GiaPha_Domain\bin\Debug\net9.0\GiaPha_Domain.pdb
+D:\GiaPhaDongHo\GiaPha_Domain\obj\Debug\net9.0\GiaPha_Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\GiaPhaDongHo\GiaPha_Domain\obj\Debug\net9.0\GiaPha_Domain.AssemblyInfoInputs.cache
+D:\GiaPhaDongHo\GiaPha_Domain\obj\Debug\net9.0\GiaPha_Domain.AssemblyInfo.cs
+D:\GiaPhaDongHo\GiaPha_Domain\obj\Debug\net9.0\GiaPha_Domain.csproj.CoreCompileInputs.cache
+D:\GiaPhaDongHo\GiaPha_Domain\obj\Debug\net9.0\GiaPha_Domain.dll
+D:\GiaPhaDongHo\GiaPha_Domain\obj\Debug\net9.0\refint\GiaPha_Domain.dll
+D:\GiaPhaDongHo\GiaPha_Domain\obj\Debug\net9.0\GiaPha_Domain.pdb
+D:\GiaPhaDongHo\GiaPha_Domain\obj\Debug\net9.0\ref\GiaPha_Domain.dll

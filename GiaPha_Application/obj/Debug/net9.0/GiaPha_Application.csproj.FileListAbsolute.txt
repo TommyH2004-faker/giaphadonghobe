@@ -1,0 +1,15 @@
+D:\GiaPhaDongHo\GiaPha_Application\bin\Debug\net9.0\GiaPha_Application.deps.json
+D:\GiaPhaDongHo\GiaPha_Application\bin\Debug\net9.0\GiaPha_Application.dll
+D:\GiaPhaDongHo\GiaPha_Application\bin\Debug\net9.0\GiaPha_Application.pdb
+D:\GiaPhaDongHo\GiaPha_Application\bin\Debug\net9.0\GiaPha_Domain.dll
+D:\GiaPhaDongHo\GiaPha_Application\bin\Debug\net9.0\GiaPha_Domain.pdb
+D:\GiaPhaDongHo\GiaPha_Application\obj\Debug\net9.0\GiaPha_Application.csproj.AssemblyReference.cache
+D:\GiaPhaDongHo\GiaPha_Application\obj\Debug\net9.0\GiaPha_Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\GiaPhaDongHo\GiaPha_Application\obj\Debug\net9.0\GiaPha_Application.AssemblyInfoInputs.cache
+D:\GiaPhaDongHo\GiaPha_Application\obj\Debug\net9.0\GiaPha_Application.AssemblyInfo.cs
+D:\GiaPhaDongHo\GiaPha_Application\obj\Debug\net9.0\GiaPha_Application.csproj.CoreCompileInputs.cache
+D:\GiaPhaDongHo\GiaPha_Application\obj\Debug\net9.0\GiaPha_A.5E4CA6ED.Up2Date
+D:\GiaPhaDongHo\GiaPha_Application\obj\Debug\net9.0\GiaPha_Application.dll
+D:\GiaPhaDongHo\GiaPha_Application\obj\Debug\net9.0\refint\GiaPha_Application.dll
+D:\GiaPhaDongHo\GiaPha_Application\obj\Debug\net9.0\GiaPha_Application.pdb
+D:\GiaPhaDongHo\GiaPha_Application\obj\Debug\net9.0\ref\GiaPha_Application.dll

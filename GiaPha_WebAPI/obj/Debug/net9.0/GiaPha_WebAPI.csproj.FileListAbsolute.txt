@@ -1,0 +1,8 @@
+D:\GiaPhaDongHo\GiaPha_WebAPI\obj\Debug\net9.0\GiaPha_WebAPI.csproj.AssemblyReference.cache
+D:\GiaPhaDongHo\GiaPha_WebAPI\obj\Debug\net9.0\rpswa.dswa.cache.json
+D:\GiaPhaDongHo\GiaPha_WebAPI\obj\Debug\net9.0\GiaPha_WebAPI.GeneratedMSBuildEditorConfig.editorconfig
+D:\GiaPhaDongHo\GiaPha_WebAPI\obj\Debug\net9.0\GiaPha_WebAPI.AssemblyInfoInputs.cache
+D:\GiaPhaDongHo\GiaPha_WebAPI\obj\Debug\net9.0\GiaPha_WebAPI.AssemblyInfo.cs
+D:\GiaPhaDongHo\GiaPha_WebAPI\obj\Debug\net9.0\GiaPha_WebAPI.csproj.CoreCompileInputs.cache
+D:\GiaPhaDongHo\GiaPha_WebAPI\obj\Debug\net9.0\GiaPha_WebAPI.MvcApplicationPartsAssemblyInfo.cs
+D:\GiaPhaDongHo\GiaPha_WebAPI\obj\Debug\net9.0\GiaPha_WebAPI.MvcApplicationPartsAssemblyInfo.cache

@@ -1,0 +1,6 @@
+@GiaPha_WebAPI_HostAddress = http://localhost:5193
+
+GET {{GiaPha_WebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
