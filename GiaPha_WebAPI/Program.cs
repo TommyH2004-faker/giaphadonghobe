@@ -182,7 +182,7 @@ if (app.Environment.IsDevelopment())
     // Development-only middleware có thể thêm ở đây
 }
 #endregion
-app.UseHttpsRedirection();
+
 
 // Health check endpoint cho Render
 app.MapGet("/health", () => Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow }));
