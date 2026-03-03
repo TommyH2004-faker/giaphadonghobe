@@ -48,7 +48,10 @@ builder.Services.AddSwaggerGen(c =>
 
 #region Database
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
+if (string.IsNullOrEmpty(connectionString))
+{
+    throw new Exception("Database connection string is missing!");
+}
 builder.Services.AddDbContext<DbGiaPha>(options =>
 {
     // options.UseMySql(
@@ -139,19 +142,27 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontendApp", policy =>
     {
         policy
+            .SetIsOriginAllowed(origin => origin.Contains("vercel.app") 
+                                       || origin.Contains("minhhiep2534.id.vn")
+                                       || origin.Contains("localhost"))
             .AllowAnyHeader()
-            .AllowAnyMethod()
-            .WithOrigins(frontendUrl);
+            .AllowAnyMethod();
     });
 });
 #endregion
 
 var rabbitUri = builder.Configuration["RabbitMQ:Uri"];
 
-var factory = new ConnectionFactory
+if (!string.IsNullOrEmpty(rabbitUri))
 {
-    Uri = new Uri(rabbitUri)
-};
+    builder.Services.AddSingleton<IRabbitMqEmailProducer>(sp =>
+    {
+        var logger = sp.GetRequiredService<ILogger<RabbitMqEmailProducer>>();
+        return new RabbitMqEmailProducer(rabbitUri, logger);
+    });
+
+    builder.Services.AddHostedService<RabbitMqEmailConsumer>();
+}
 
 
 builder.Services.AddAuthorization();
