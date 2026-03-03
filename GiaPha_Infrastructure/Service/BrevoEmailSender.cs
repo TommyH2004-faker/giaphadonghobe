@@ -19,13 +19,22 @@ public class BrevoEmailSender : IEmailSender
     {
         _logger = logger;
 
-        var apiKey = configuration["Brevo:ApiKey"]
-            ?? throw new InvalidOperationException("Brevo ApiKey not configured");
-        _fromEmail = configuration["Brevo:FromEmail"]
-            ?? throw new InvalidOperationException("Brevo FromEmail not configured");
+        var apiKey = configuration["Brevo:ApiKey"];
+        if (string.IsNullOrWhiteSpace(apiKey))
+            throw new InvalidOperationException("[Brevo] ApiKey is not configured. Set 'Brevo__ApiKey' environment variable on Render.");
+
+        _fromEmail = configuration["Brevo:FromEmail"];
+        if (string.IsNullOrWhiteSpace(_fromEmail))
+            throw new InvalidOperationException("[Brevo] FromEmail is not configured. Set 'Brevo__FromEmail' environment variable on Render.");
+
         _fromName = configuration["Brevo:FromName"] ?? "GiaPha Notification";
 
-        sib_api_v3_sdk.Client.Configuration.Default.ApiKey.Add("api-key", apiKey);
+        // Tránh duplicate key khi Singleton bị resolve nhiều lần
+        if (!sib_api_v3_sdk.Client.Configuration.Default.ApiKey.ContainsKey("api-key"))
+            sib_api_v3_sdk.Client.Configuration.Default.ApiKey.Add("api-key", apiKey);
+        else
+            sib_api_v3_sdk.Client.Configuration.Default.ApiKey["api-key"] = apiKey;
+
         _apiInstance = new TransactionalEmailsApi();
     }
 
