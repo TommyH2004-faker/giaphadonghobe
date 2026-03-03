@@ -28,6 +28,14 @@ public class RabbitMqEmailConsumer : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
+        // Nếu không có URI cấu hình → không khởi động consumer, email sẽ gửi trực tiếp qua Brevo
+        var uri = _configuration["RabbitMQ:Uri"];
+        if (string.IsNullOrWhiteSpace(uri))
+        {
+            _logger.LogInformation("[EmailConsumer] RabbitMQ URI not configured. Consumer disabled - emails sent directly via Brevo.");
+            return;
+        }
+
         // Retry connection với backoff
         while (!stoppingToken.IsCancellationRequested)
         {
@@ -35,12 +43,12 @@ public class RabbitMqEmailConsumer : BackgroundService
             {
                 if (!TryConnect())
                 {
-                    _logger.LogWarning("RabbitMQ not available. Retrying in 30 seconds...");
+                    _logger.LogWarning("[EmailConsumer] RabbitMQ not available. Retrying in 30 seconds...");
                     await Task.Delay(TimeSpan.FromSeconds(30), stoppingToken);
                     continue;
                 }
 
-                _logger.LogInformation("RabbitMQ consumer started successfully");
+                _logger.LogInformation("[EmailConsumer] RabbitMQ consumer started successfully");
                 
                 var consumer = new EventingBasicConsumer(_channel);
                 consumer.Received += async (model, ea) =>
@@ -87,11 +95,11 @@ public class RabbitMqEmailConsumer : BackgroundService
                     await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
                 }
 
-                _logger.LogWarning("RabbitMQ connection lost. Reconnecting...");
+                _logger.LogWarning("[EmailConsumer] RabbitMQ connection lost. Reconnecting...");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error in RabbitMQ consumer. Retrying in 30 seconds...");
+                _logger.LogError(ex, "[EmailConsumer] Error in RabbitMQ consumer. Retrying in 30 seconds...");
                 await Task.Delay(TimeSpan.FromSeconds(30), stoppingToken);
             }
         }
@@ -101,12 +109,11 @@ public class RabbitMqEmailConsumer : BackgroundService
     {
         try
         {
-            var rabbitConfig = _configuration.GetSection("RabbitMQ");
+            var uri = _configuration["RabbitMQ:Uri"];
             var factory = new ConnectionFactory
             {
-                HostName = rabbitConfig["Host"] ?? "localhost",
-                UserName = rabbitConfig["Username"] ?? "guest",
-                Password = rabbitConfig["Password"] ?? "guest"
+                Uri = new Uri(uri!),
+                DispatchConsumersAsync = false
             };
 
             _connection = factory.CreateConnection();
@@ -122,7 +129,7 @@ public class RabbitMqEmailConsumer : BackgroundService
         }
         catch (Exception ex)
         {
-            _logger.LogWarning(ex, "Failed to connect to RabbitMQ");
+            _logger.LogWarning(ex, "[EmailConsumer] Failed to connect to RabbitMQ");
             return false;
         }
     }

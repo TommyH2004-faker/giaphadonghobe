@@ -65,17 +65,6 @@ builder.Services.AddDbContext<DbGiaPha>(options =>
 });
 #endregion
 // config DI cho RabbitMQ
-
-builder.Services.AddSingleton<IRabbitMqEmailProducer>(sp =>
-{
-    var config = sp.GetRequiredService<IConfiguration>();
-    var logger = sp.GetRequiredService<ILogger<RabbitMqEmailProducer>>();
-
-    var uri = config["RabbitMQ:Uri"];
-
-    return new RabbitMqEmailProducer(uri!, logger);
-});
-builder.Services.AddHostedService<RabbitMqEmailConsumer>();
 builder.Services.AddSingleton<IEmailSender, BrevoEmailSender>();
 
 
@@ -153,14 +142,16 @@ builder.Services.AddCors(options =>
 
 var rabbitUri = builder.Configuration["RabbitMQ:Uri"];
 
+// Nếu có RabbitMQ URI → dùng queue async. Nếu không → Producer tự dùng Brevo fallback.
+builder.Services.AddSingleton<IRabbitMqEmailProducer>(sp =>
+{
+    var logger = sp.GetRequiredService<ILogger<RabbitMqEmailProducer>>();
+    var emailSender = sp.GetRequiredService<IEmailSender>();
+    return new RabbitMqEmailProducer(rabbitUri, emailSender, logger);
+});
+
 if (!string.IsNullOrEmpty(rabbitUri))
 {
-    builder.Services.AddSingleton<IRabbitMqEmailProducer>(sp =>
-    {
-        var logger = sp.GetRequiredService<ILogger<RabbitMqEmailProducer>>();
-        return new RabbitMqEmailProducer(rabbitUri, logger);
-    });
-
     builder.Services.AddHostedService<RabbitMqEmailConsumer>();
 }
 

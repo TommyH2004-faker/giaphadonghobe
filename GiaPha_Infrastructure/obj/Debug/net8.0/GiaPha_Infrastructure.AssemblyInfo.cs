@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GiaPha_Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b73c54e5266eae6044df48f2f3b4d0ca80d9960f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0675f93778cfbc6000471688afcb423210a77c04")]
 [assembly: System.Reflection.AssemblyProductAttribute("GiaPha_Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GiaPha_Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
