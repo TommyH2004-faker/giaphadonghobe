@@ -31,13 +31,12 @@ public class BrevoEmailService : IEmailService
 
         _fromName = configuration["Brevo:FromName"] ?? "GiaPha Notification";
 
-        // Tránh duplicate key khi Scoped bị resolve nhiều lần trong cùng static config
-        if (!sib_api_v3_sdk.Client.Configuration.Default.ApiKey.ContainsKey("api-key"))
-            sib_api_v3_sdk.Client.Configuration.Default.ApiKey.Add("api-key", apiKey);
-        else
-            sib_api_v3_sdk.Client.Configuration.Default.ApiKey["api-key"] = apiKey;
+        // Tạo instance Configuration riêng, inject trực tiếp vào API client
+        // Tránh dùng static Configuration.Default (bị share/overwrite giữa các service)
+        var brevoConfig = new sib_api_v3_sdk.Client.Configuration();
+        brevoConfig.ApiKey["api-key"] = apiKey;
 
-        _apiInstance = new TransactionalEmailsApi();
+        _apiInstance = new TransactionalEmailsApi(brevoConfig);
     }
 
     public async Task<bool> SendEmailAsync(string to, string subject, string body, bool isHtml = true)
